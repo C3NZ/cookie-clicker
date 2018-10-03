@@ -49,16 +49,17 @@ buyClickPower.addEventListener("click", function() {
 			Grandmas
 ********************************/
 let grandmaAuto = false;
-
 let grandmaPower = 50;
 let grandmaPriceAmount = 500;
 let grandmaLevelNumber = 1;
 
+//Select all Grandma elements in the DOM
 let buyGrandma = document.getElementById('buy-grandma');
 let grandmaPrice = document.getElementById('grandma-price');
 let grandmaLevel = document.getElementById('grandma-level');
 let grandmaMultiple = document.getElementById('grandma-multiple')
 
+//Event listener for if a grandma is trying to be bought
 buyGrandma.addEventListener("click", function() {
 	if(cookieCount >= grandmaPriceAmount){
 		autoGrandma = true;
@@ -75,6 +76,25 @@ buyGrandma.addEventListener("click", function() {
 	}else{
 		console.log("You don't have enough money for that!'")
 	}
+});
+
+/********************************
+		   Facilities
+********************************/
+let facilityAuto = false;
+let facilityPower = 2000;
+let facilityPriceAmount = 100000;
+let facilityLevelNumber = 0;
+
+//Select all facility related elements within the DOM
+let buyFacility = document.getElementById('buy-facility');
+let facilityPrice = document.getElementById('facility-price');
+let facilityLevel = document.getElementById('facility-level');
+let facilityMultiple = document.getElementById('facility-multiple');
+
+//Event listener for if a facility is trying to be bought
+buyFacility.addEventListener("click", function () {
+
 });
 
 
@@ -101,6 +121,7 @@ let refreshGrandma = function(){
 	grandmaPrice.innerHTML = grandmaPriceAmount;
 }
 
+//Grandma auto start function for baking cookies.
 let grandmaAutoStart = function() {
 	let grandmaInt = window.setInterval(function() {
 		cookieCount += grandmaPower;
