@@ -1,7 +1,10 @@
-//---cookie clicker button section---
+/****************************************
+	  cookie clicker button section 
+****************************************/
 let cookieCount = 0;
 let clickPower = 1;
 
+//Select Cookie counter and cookie clicker on the DOM
 let cookieCounter = document.getElementById('cookie-counter');
 let cookieClicker = document.getElementById('cookie-clicker');
 
@@ -12,17 +15,19 @@ cookieClicker.addEventListener("click", function() {
 })
 
 
-//--- End cookie clicker button section --
-
-//--- Upgrade click power section ---
+/************************************
+	 Upgrade click power section
+ ************************************/
 let clickPowerPriceAmount = 50;
 let clickPowerLevelNumber = 1;
 
+//Select all click power related shop items on the DOM
 let buyClickPower = document.getElementById('buy-click-power');
 let clickPowerPrice = document.getElementById('click-power-price');
 let clickPowerLevel = document.getElementById('click-power-level');
 let clickPowerMultiple = document.getElementById('click-power-multiple');
 
+//Increase click power when the user has enough money to purchase
 buyClickPower.addEventListener("click", function() {
 	if(cookieCount >= clickPowerPriceAmount){
 		cookieCount -= clickPowerPriceAmount;
@@ -35,13 +40,14 @@ buyClickPower.addEventListener("click", function() {
 		//Refresh both clickpower and cookie count
 		refreshClickPower()
 		refreshCookieCount();
-	}else {
+	}else{
 		console.log("you don't have enough money for that!");
 	}
 })
 
-//--- End upgrade click power section --- 
-
+/* *****************************
+	Helper/redraw functions
+********************************/
 
 //Refresh the cookie count HTML
 let refreshCookieCount = function() {
