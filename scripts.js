@@ -45,6 +45,39 @@ buyClickPower.addEventListener("click", function() {
 	}
 })
 
+/********************************
+			Grandmas
+********************************/
+let grandmaAuto = false;
+
+let grandmaPower = 50;
+let grandmaPriceAmount = 500;
+let grandmaLevelNumber = 1;
+
+let buyGrandma = document.getElementById('buy-grandma');
+let grandmaPrice = document.getElementById('grandma-price');
+let grandmaLevel = document.getElementById('grandma-level');
+let grandmaMultiple = document.getElementById('grandma-multiple')
+
+buyGrandma.addEventListener("click", function() {
+	if(cookieCount >= grandmaPriceAmount){
+		autoGrandma = true;
+		grandmaAutoStart();
+
+		cookieCount -= grandmaPriceAmount;
+
+		grandmaPower += 10;
+		grandmaLevelNumber += 1;
+		grandmaPriceAmount = Math.floor(grandmaPriceAmount * 1.33);
+
+		refreshGrandma();
+		refreshCookieCount();
+	}else{
+		console.log("You don't have enough money for that!'")
+	}
+});
+
+
 /* *****************************
 	Helper/redraw functions
 ********************************/
@@ -61,4 +94,17 @@ let refreshClickPower = function(){
 	clickPowerMultiple.innerHTML = clickPower;
 }
 
+//Refresh grandma HTML
+let refreshGrandma = function(){
+	grandmaMultiple.innerHTML = grandmaPower - 10;
+	grandmaLevel.innerHTML = grandmaLevelNumber;
+	grandmaPrice.innerHTML = grandmaPriceAmount;
+}
+
+let grandmaAutoStart = function() {
+	let grandmaInt = window.setInterval(function() {
+		cookieCount += grandmaPower;
+		refreshCookieCount();
+	}, 1000);
+}
 
