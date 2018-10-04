@@ -33,7 +33,7 @@ buyClickPower.addEventListener("click", function() {
 		cookieCount -= clickPowerPriceAmount;
 		
 		//Upgrade the click power, raise the power level, amd raose the price of upgrading power again 
-		clickPower += 1;
+		clickPower += 1 * Math.floor(clickPowerLevelNumber * 1.05);
 		clickPowerLevelNumber = clickPowerLevelNumber + 1;
 		clickPowerPriceAmount = Math.floor(clickPowerPriceAmount * 1.33);
 		
@@ -67,7 +67,7 @@ buyGrandma.addEventListener("click", function() {
 
 		cookieCount -= grandmaPriceAmount;
 
-		grandmaPower += 10;
+		grandmaPower += 10 + Math.floor(grandmaLevelNumber * 1.33);
 		grandmaLevelNumber += 1;
 		grandmaPriceAmount = Math.floor(grandmaPriceAmount * 1.33);
 
@@ -94,7 +94,21 @@ let facilityMultiple = document.getElementById('facility-multiple');
 
 //Event listener for if a facility is trying to be bought
 buyFacility.addEventListener("click", function () {
+	if(cookieCount >= facilityPriceAmount) {
+		//Upgrade facility stats
+		cookieCount -= facilityPriceAmount;
+		facilityLevelNumber += 1;
+		facilityPower += 600 + Math.floor(facilityLevelNumber * 1.33);
+		facilityPriceAmount = Math.floor(facilityPriceAmount * 1.33);
 
+		//Spin up a new facility
+		facilityAuto = true;
+		facilityAutoStart();
+		
+		//Update the cookie & facility count
+		refreshFacility();
+		refreshCookieCount();
+	}
 });
 
 
@@ -114,11 +128,18 @@ let refreshClickPower = function(){
 	clickPowerMultiple.innerHTML = clickPower;
 }
 
-//Refresh grandma HTML
+//Refresh grandma shop item HTML
 let refreshGrandma = function(){
 	grandmaMultiple.innerHTML = grandmaPower - 10;
 	grandmaLevel.innerHTML = grandmaLevelNumber;
 	grandmaPrice.innerHTML = grandmaPriceAmount;
+}
+
+//Refresh facility shop item HTML
+let refreshFacility = function(){
+	facilityLevel.innerHTML = facilityLevelNumber;
+	facilityPrice.innerHTML = facilityPriceAmount;
+	facilityMultiple.innerHTML = facilityPower - 600;
 }
 
 //Grandma auto start function for baking cookies.
@@ -127,5 +148,12 @@ let grandmaAutoStart = function() {
 		cookieCount += grandmaPower;
 		refreshCookieCount();
 	}, 1000);
+
 }
 
+let facilityAutoStart = function() {
+	let facilityInt = window.setInterval(function() {
+		cookieCount += facilityPower;
+		refreshCookieCount();
+	}, 1000)
+}
